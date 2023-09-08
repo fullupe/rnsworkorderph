@@ -99,7 +99,7 @@ function Receiptionist() {
   return (
     <div className="flex min-h-screen justify-center items-center bg-red-100">
      <div
-      className='py-4 px-6 bg-white bg-gradient-to-r from-sky-100 to-indigo-500 shadow-2xl h-4/5 md:max-w-md !important text-lg rounded-2xl relativee absolutev  flex flex-col h leading- w-4/5 text-white mt-8 mb-12 overflow-hidden'
+      className='py-4 px-6 bg-white bg-gradient-to-r from-sky-100 to-indigo-500 shadow-2xl h-4/5 md:max-w-md !important text-lg rounded-2xl relativee absolutev  flex flex-col h leading- w-[98%] text-white mt-8 mb-12 overflow-hidden'
     >
 
       

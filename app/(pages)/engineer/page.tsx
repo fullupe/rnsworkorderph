@@ -85,7 +85,7 @@ function Engineer() {
   return (
     <div className="flex min-h-screen justify-center items-center">
     <div
-      className={`py-12  px-6 bg-whitee bg-gradient-to-r from-sky-500 to-indigo-500 shadow-2xl h-[95%] md:max-w-md !important text-lg rounded-2xl relative  flex flex-col h leading- w-4/5 text-white mt-6  overflow-hidden`}
+      className={`py-12  px-6 bg-whitee bg-gradient-to-r from-sky-500 to-indigo-500 shadow-2xl h-[95%] md:max-w-md !important text-lg rounded-2xl relative  flex flex-col h leading- w-[98%] text-white mt-6  overflow-hidden`}
     >
       <ToastContainer />
       <div className="felx flex-col space-y-2">
