@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import { BallTriangle,Circles } from  'react-loader-spinner'
+import {Circles } from  'react-loader-spinner'
 import TimeAgo from 'react-timeago'
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -12,7 +12,7 @@ import { useUserContext } from '@/app/context/userContex'
 
 function Receiptionist() {
 
-  const {user,setUser}=useUserContext()
+  const {user}=useUserContext()
 
   const [activeUser,setActiveUser]=useState('')
 
@@ -55,12 +55,7 @@ function Receiptionist() {
 
   const handleSubmitIn=()=>{
     const request = {
-      // tpm: tpmInfo.tpm,
-      // agentName: tpmInfo.agentName,
-      // status: 'Working On',
-      // branch: tpmInfo.branch,
-      // createdAt: new Date(),
-      // ruser:activeUser,
+     
       ...tpmInfo,status:"Working On",
       createdAt: new Date(),
       ruser:activeUser
@@ -77,12 +72,7 @@ function Receiptionist() {
   const handleSubmitOut=()=>{
 
     const request = {
-      // tpm: tpmInfo.tpm,
-      // agentName: tpmInfo.agentName,
-      // status: 'Already Out',
-      // branch: tpmInfo.branch,
-      // createdAt: new Date(),
-      // ruser:activeUser,
+     
       ...tpmInfo,status:"Already Out",createdAt: new Date(),ruser:activeUser
     }
 
