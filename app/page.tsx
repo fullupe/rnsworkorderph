@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ToastContainer, toast } from 'react-toastify';
 import TimeAgo from "react-timeago"
 import { useFetchData } from './hooks/useFetchData';
+import Image from 'next/image';
 
 
 
@@ -166,7 +167,7 @@ function Agent() {
 
         <p className="text-sm text-gray-300 font-tapestry italic">  *️⃣ Do Not hold paper whiles Printing ✊ </p>
              
-             <img className="h-32 w-40 mb-8" src="/logo.png" alt="log"/>
+             <Image width={90} height={90} className="mb-8" src="/logo.png" alt="log"/>
 
 
           </div>
