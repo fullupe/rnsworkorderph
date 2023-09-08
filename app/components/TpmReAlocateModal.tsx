@@ -29,13 +29,13 @@ function TpmReAlocateModal({setOpenModal}:Props):React.JSX.Element | null {
     return (
     <div onClick={handleClose} id="wrap" className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm justify-center items-center flex">
         
-        <div className="w-[600px] flex flex-col justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center">
 
          <button onClick={()=>setOpenModal(false)} className=" place-self-end text-2xl text-white">x</button>
 
-         <div className="bg-white p-2 rounded-lg h-full flex flex-col ">
+         <div className="bg-white p-1 rounded-lg h-full w-full md:w-[50%] mx-2 flex flex-col ">
 
-        <Tabs defaultValue="Realocate" className={`w-[600px] items-center justify-center`}>
+        <Tabs defaultValue="Realocate" className={`w-full items-center justify-center`}>
         <TabsList className="">
             <TabsTrigger className="bg-red-500 text-white font-bold" value="Realocate">Re-Allocate TPM</TabsTrigger>
 
