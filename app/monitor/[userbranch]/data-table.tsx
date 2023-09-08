@@ -17,17 +17,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { useRouter } from 'next/navigation'
-
-
 import React, { useEffect, useRef } from 'react'
-import { Button } from "@tremor/react"
-import { useFetchData } from "@/app/hooks/useFetchData"
-import Router from "next/router"
+
 import { ColorRing } from "react-loader-spinner"
 
 
-const Base_URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string;
+//const Base_URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string;
 
 
 interface DataTableProps<TData, TValue> {
@@ -89,7 +84,7 @@ useEffect(() => {
   simulateDataSourceChange();
   //window.location.reload();
   
-}, [Base_URL]);
+}, []);
 
 
   return (
