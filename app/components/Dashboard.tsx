@@ -4,13 +4,9 @@ import Footer from './Footer'
 import { BarList, Card, Title, Bold, Flex, Text, Metric, CategoryBar, Legend,Divider,ListItem, DonutChart,  BarChart, Subtitle  } from "@tremor/react";
 import { useFetchData } from '../hooks/useFetchData';
 import { useUserContext } from '../context/userContex';
-// {params}:{params:{userbranch:string}}
+
 function Dashboard() {
 
-  const {user,setUser}=useUserContext()
-
- // @ts-ignore
-    const branchName = user.userbranch
 
   const [branch, setBranch]= useState('')
 
