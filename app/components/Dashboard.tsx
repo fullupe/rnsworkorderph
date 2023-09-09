@@ -149,7 +149,7 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
         {
           newdata.map((val:any)=>(
 
-            <div className="flex  gap-4 w-40 bg-green-800h px-2  py-2 mt-2 items-center shadow-lg">
+            <div key={val.id} className="flex  gap-4 w-40 bg-green-800h px-2  py-2 mt-2 items-center shadow-lg">
 
            <div key={val[0]} onClick={()=>setBranch(val)} className={` ${val[0] == branch[0] ? "text-white underline " : "text-gray-400 "}  flex w-60 px-2 items-center justify-center border-2 border-white rounded-full h-12 cursor-pointer `}>
             

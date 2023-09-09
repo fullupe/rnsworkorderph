@@ -24,7 +24,7 @@ function TpmNewAlocate({}: Props) {
   useEffect(() => {
     setBranchOffice(userbranch)
    
-  }, [])
+  }, [user])
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
