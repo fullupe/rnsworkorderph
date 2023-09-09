@@ -19,11 +19,14 @@ function Dashboard() {
 
   const [filtedBrach, SetFiltedBrach]=useState([])
 
+  const [filtedBrach_Problem, SetfiltedBrach_Problem]=useState([])
+
   const {DataApi}=useFetchData()
 
   const getUserBranch=()=>{
       const filted = DataApi.filter((val:any)=>val.branch == branchName)
       SetFiltedBrach(filted);
+       SetfiltedBrach_Problem(filted.filter((val:{status:string})=>val.status != "Already Out"))
     }
 
   useEffect(()=>{
@@ -34,7 +37,7 @@ function Dashboard() {
 
 
   //groupBy problem
-  const result2 = filtedBrach.reduce(function(r: { [x: string]: any[]; }, a: { status: string | number; }){
+  const result2 = filtedBrach_Problem.reduce(function(r: { [x: string]: any[]; }, a: { status: string | number; }){
     r[a.status]=r[a.status] || [];
     r[a.status].push(a);
     return r;
@@ -60,11 +63,7 @@ const Active = TotalWorkingTpm.length
 const Inactive = TotalTpm - TotalWorkingTpm.length;
 
 
-
- 
  const problems1 = newdata2.map((val)=>{
-
-  
   return {
     name:val[0],
     value:val[1].length,

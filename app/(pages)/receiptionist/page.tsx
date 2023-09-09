@@ -36,24 +36,25 @@ function Receiptionist() {
         return val
       } else if (val.tpm == input) {
         //return val
-        setTpmInfo(val)
+        setTpmInfo(val);
         toast('Record Found!', {
           icon: '🚀',
         })
-        setFetchReflesh(!fetchReflesh)
       }
       // else if(!tpmInfo){
-      //   toast('No Record Found!', {
-      //     icon: '🎭 ',
-      //   })
-      // }
-    })
+        //   toast('No Record Found!', {
+          //     icon: '🎭 ',
+          //   })
+          // }
+        })
+  
+        setFetchReflesh(!fetchReflesh)
   
    //setInput("")
 
   }
 
-  const handleSubmitIn=()=>{
+  const handleSubmitIn=(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     const request = {
      
       ...tpmInfo,status:"Working On",
@@ -69,7 +70,7 @@ function Receiptionist() {
 
   }
 
-  const handleSubmitOut=()=>{
+  const handleSubmitOut=(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 
     const request = {
      
@@ -111,7 +112,7 @@ function Receiptionist() {
             Receptionist Check 📮{' '}
           </p>
           
-          <p> Welcom {activeUser}</p>
+          <p> Welcome {activeUser}</p>
 
           <form onSubmit={handleSearch} className="flex items-center mt-3 space-x-3f mb-4">
             <div className="flex w-full bg-white border-2 border-green-900 rounded-full items-center overflow-hidden">

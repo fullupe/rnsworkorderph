@@ -39,9 +39,9 @@ function Engineer() {
         toast('Record Found!', {
           icon: '🚀',
         })
-        setFetchReflesh(!fetchReflesh)
       }
     })
+    setFetchReflesh(!fetchReflesh)
 
 
   }
