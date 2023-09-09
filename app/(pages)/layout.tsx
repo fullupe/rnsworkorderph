@@ -3,7 +3,7 @@
 import '../../postcss.config'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { usePathname,useRouter } from 'next/navigation'
+
 
 
 
