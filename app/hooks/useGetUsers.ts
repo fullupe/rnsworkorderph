@@ -31,7 +31,7 @@ export const useGetUsers=()=>{
 
   useEffect(()=>{
     httpGetPassCode(`${Base_URL}getPass`)
-  },[])
+  },[Base_URL])
 
         
       
