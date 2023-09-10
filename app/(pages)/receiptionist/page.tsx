@@ -21,7 +21,7 @@ function Receiptionist() {
     setActiveUser(user.username)
   },[])
 
-  const {updateRecords, Loading,SetLoading}=useChangeStatus()
+  const {updateRecords, Loading, SetLoading}=useChangeStatus()
   
   const {DataApi,fetchReflesh,setFetchReflesh}=useFetchData()
   
@@ -57,15 +57,18 @@ function Receiptionist() {
   const handleSubmitIn=(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     const request = {
      
-      ...tpmInfo,status:"Working On",
+      ...tpmInfo,
+      status:"Working On",
       createdAt: new Date(),
       ruser:activeUser
     }
+    //SetLoading(true)
 
       updateRecords(request)
       setInput("")
 
       setFetchReflesh(!fetchReflesh)
+
       SetLoading(false)
 
   }
@@ -74,7 +77,10 @@ function Receiptionist() {
 
     const request = {
      
-      ...tpmInfo,status:"Already Out",createdAt: new Date(),ruser:activeUser
+      ...tpmInfo,
+      status:"Already Out",
+      createdAt: new Date(),
+      ruser:activeUser
     }
 
     updateRecords(request)
@@ -126,7 +132,7 @@ function Receiptionist() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                maxLength={4}
+                maxLength={5}
                 type="numeric"
               
                 autoFocus={true}

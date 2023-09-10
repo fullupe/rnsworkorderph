@@ -20,13 +20,10 @@ export const useChangeStatus=()=>{
 
   const {DataApi,fetchReflesh,setFetchReflesh}=useFetchData()
 
-    //const [reflesh, setReflesh] = useState<boolean>(false);
+  const [Loading, SetLoading] = useState<boolean>(false);
 
-    const [Loading, SetLoading] = useState<boolean>(false);
-
-
-    const updateRecords=(request:Props)=>{
-
+  const updateRecords=(request:Props)=>{
+    
     const xmlHttp = new XMLHttpRequest()
     xmlHttp.open('POST', `${Base_URL}upDate`, true) // false for synchronous request
    
@@ -37,27 +34,25 @@ export const useChangeStatus=()=>{
     }
 
     xmlHttp.send(JSON.stringify(request)) // Make sure to stringify
+    
+    xmlHttp.onload = function (){
+    
+        SetLoading(false)
+    
 
-    xmlHttp.onload = function () {
-      SetLoading(false)
-
-      //setReflesh(true)
-      
-      // Do whatever with response
-      //console.log(request)
-      //alert(xmlHttp.responseText)
       toast('Records Updated!', {
         icon: '🚀',
       })
-      console.log(xmlHttp.responseText)
-      //   setInput('')
+      //console.log(xmlHttp.responseText)
+    
       setFetchReflesh(!fetchReflesh)
     }
+    
     xmlHttp.onerror = function () {
-      ///alert(xmlHttp.responseText)
-      console.log(xmlHttp.responseText)
+   
+      //console.log(xmlHttp.responseText)
     }
-    //setReflesh(false)
+   
 
  }
 
