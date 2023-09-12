@@ -14,7 +14,7 @@ function TpmReAlocate({}: Props) {
     const [tpmInfo, setTpmInfo] = useState<any>('')
     const {DataApi,fetchReflesh,setFetchReflesh}=useFetchData()
 
-    const {updateRecords}=useChangeStatus()
+    const {updateRealocate}=useChangeStatus()
 
 
     const handleSearch =(e:React.FormEvent<HTMLFormElement>)=>{
@@ -51,7 +51,7 @@ function TpmReAlocate({}: Props) {
         ruser:tpmInfo.ruser,
       }
   
-      updateRecords(request)
+      updateRealocate(request)
      
   
       setFetchReflesh(!fetchReflesh)

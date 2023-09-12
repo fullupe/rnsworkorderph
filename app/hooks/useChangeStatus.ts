@@ -114,9 +114,38 @@ export const useChangeStatus=()=>{
    
 
  }
+  const updateRealocate=  (request:Props)=>{
+    
+    const xmlHttp = new XMLHttpRequest()
+      xmlHttp.open('POST', `${Base_URL}upDate`, true) // false for synchronous request
+   
+    if(xmlHttp.readyState==1){
+      SetLoading(true)
+    }else {
+      SetLoading(false)
+    }
+
+     xmlHttp.send(JSON.stringify(request)) // Make sure to stringify
+    
+    xmlHttp.onload = function (){
+    
+      SetLoading(false)
+      toast('Records Updated!', {
+        icon: '🚀',
+      })
+      
+    }
+    
+    xmlHttp.onerror = function () {
+   
+      //console.log(xmlHttp.responseText)
+    }
+   
+
+ }
 
 
 
-    return { Loading,SetLoading,add_To_Sheet2,delete_From_Sheet2,updateSheet2_Status}
+    return { Loading,SetLoading,add_To_Sheet2,delete_From_Sheet2,updateSheet2_Status,updateRealocate}
 
 }
