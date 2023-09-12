@@ -34,31 +34,26 @@ function Agent() {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
 
+    const foundItem = DataApi2.find((val: { tpm: string }) => val.tpm == input);
 
-    DataApi2.find((val: { tpm: string })=>{
-         if(!input){
-         return val
-         }else if (val.tpm == input){
-           setTpmInfo(val);
-          //  toast(` Tpm ${input} Already Out`,{
-          //    toastId:"error",
-          //    icon:'🚀',
-          //  })
-           setInput('')
-           
-        }else{
-          
-        //   toast('NO Record Found!',{
-        //     toastId:"success",
-        //    icon:'🚀',
-        //  })
-          
+    if (foundItem) {
+      // Match found
+      setTpmInfo(foundItem);
+      setInput('');
+      
+      toast('Record Found!', {
+        toastId: 'success',
+        icon: '🚀',
+      });
+    } else {
+      // No match found
+      toast(`Tpm ${input} Already Out`, {
+        toastId: 'error',
+        icon: '🚀',
+      });
+    }
 
-         }
-         setInput('')
-       })
-       setReflesh(!reflesh)
-
+    
    }
 
 
