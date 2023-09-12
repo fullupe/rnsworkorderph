@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import {Circles } from  'react-loader-spinner'
-import TimeAgo from 'react-timeago'
+
 import { ToastContainer, toast } from 'react-toastify';
 
 import {useFetchData} from  "../../hooks/useFetchData"
@@ -21,7 +21,7 @@ function Receiptionist() {
     setActiveUser(user.username)
   },[])
 
-  const {updateRecords, Loading, SetLoading}=useChangeStatus()
+  const {add_To_Sheet2,delete_From_Sheet2, Loading}=useChangeStatus()
   
   const {DataApi,fetchReflesh,setFetchReflesh}=useFetchData()
   
@@ -41,63 +41,46 @@ function Receiptionist() {
           icon: '🚀',
         })
       }
-      // else if(!tpmInfo){
-        //   toast('No Record Found!', {
-          //     icon: '🎭 ',
-          //   })
-          // }
+     
         })
   
         setFetchReflesh(!fetchReflesh)
-  
-   //setInput("")
+
 
   }
 
-  const handleSubmitIn=(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+  const handleSubmitIn= async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     const request = {
-     
       ...tpmInfo,
       status:"Working On",
       createdAt: new Date(),
       ruser:activeUser
     }
-    //SetLoading(true)
 
-      updateRecords(request)
+      add_To_Sheet2(request)
       setInput("")
-
-      setFetchReflesh(!fetchReflesh)
-
-      SetLoading(false)
-
   }
 
-  const handleSubmitOut=(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-
+  const handleSubmitOut= async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+   
     const request = {
-     
-      ...tpmInfo,
-      status:"Already Out",
-      createdAt: new Date(),
-      ruser:activeUser
+      tpm:tpmInfo.tpm
     }
 
-    updateRecords(request)
+    delete_From_Sheet2(request)
     setInput("")
 
-    setFetchReflesh(!fetchReflesh)
-
-    SetLoading(false)
-
-
   }
+
+
+
+
   const statusColor = tpmInfo.status == 'Ready ✅' ? 'bg-[#00C600] text-white' : // @ts-ignore 
   tpmInfo.status == 'Working On' ? 'bg-[#152E61] text-white' : // @ts-ignore 
   tpmInfo.status == 'Water Entered' ? 'bg-[#877FBF] text-white' :// @ts-ignore 
  
   tpmInfo.status == 'On Test' ? 'bg-[#315EA7] text-white' :  // @ts-ignore 
-  // row.original.status == 'See Management' ? 'bg-red-900' :// @ts-ignore 
+   
   tpmInfo.status == 'Waiting for Part' ? 'bg-[#8EEEF7] text-whited' :// @ts-ignore 
   
   "bg-[#E7223B] text-white "; 
@@ -160,7 +143,7 @@ function Receiptionist() {
             <div className="w-full flex flex-col mt-2 mb-1 items-right space-y-4 pb-1">
               <label className="font-bold">Retailer Name</label>
               <p className=" px-4 bg-gray-900 rounded-lg text-white shadow-lg border-2 border-white opacity-60">
-                {/* Retailer Name:{' '} */}
+             
                 <small className="ml-2 text-center uppercase ">
                   {tpmInfo.agentName}
                 </small>
@@ -170,39 +153,30 @@ function Receiptionist() {
                 <div className="fle flex-col w-full">
               <label className="font-bold">Tpm Num</label>
                 <p className=" flex-1 px-4 bg-gray-900 rounded-lg text-white shadow-lg border-2 border-white opacity-60">
-                  {/* Tpm#:{' '} */}
+              
                   <small className="ml-2 text-center ">{tpmInfo.tpm}</small>
                 </p>
 
                 </div>
 
                 <div className="flex flex-col w-full">
-                <label className="font-bold"> Tpm status</label>
-                <p className={` flex-1 px-4 border-2 border-white ${statusColor} rounded-lg text-white shadow-lg opacity-60`}>
-                  {/* Status:  */}
-                  <small className="ml-2 text-center ">{tpmInfo.status}</small>
+                <label className="font-bold"> Branch office</label>
+                <p className={` flex-1 px-4 border-2 border-white  bg-gray-900   rounded-lg text-white shadow-lg opacity-60`}>
+             
+                  <small className="ml-2 text-center ">{tpmInfo.branch}</small>
                 </p>
 
                 </div>
 
               </div>
               
-              <label className="font-bold ">Duration</label>
-              <p className=" px-4 -mt-2 bg-gray-900 rounded-lg border-2 border-white text-white shadow-lg opacity-60">
-              
-                <small className="ml-2 text-center ">
-                  <TimeAgo
-                    className="text-lg text-white"
-                    date={tpmInfo.createdAt}
-                  />
-                </small>
-              </p>
-
+    
             </div>
             }
 
 
             {Loading &&<Circles color="#FC6238" height={40} width={70} />}
+
           </div>
         </div>
 

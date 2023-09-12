@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import { BarList, Card, Title, Bold, Flex, Text, Metric, CategoryBar, Legend,Divider,ListItem, DonutChart,  BarChart, Subtitle  } from "@tremor/react";
 import { useFetchData } from '../hooks/useFetchData';
-import { useUserContext } from '../context/userContex';
+
+import { useFetchDataSheet2 } from '../hooks/useFetchDataSheet2';
 
 function Dashboard() {
 
@@ -14,15 +15,30 @@ function Dashboard() {
   const [filtedBrach_Problem, SetfiltedBrach_Problem]=useState([])
 
   const {DataApi,fetchReflesh,setFetchReflesh}=useFetchData()
+  const {DataApi2, }=useFetchDataSheet2()
 
 
-  //groupBy BRANCH
+
+  //groupBy BRANCH 
   const result = DataApi.reduce(function(r: { [x: string]: any[]; }, a: { branch: string | number; }){
     r[a.branch]=r[a.branch] || [];
     r[a.branch].push(a);
     return r;
 
   },Object.create(null));
+  const newdata = Object.entries(result)
+
+  //groupBy BRANCH 2
+  const result22 = DataApi2.reduce(function(r: { [x: string]: any[]; }, a: { branch: string | number; }){
+    r[a.branch]=r[a.branch] || [];
+    r[a.branch].push(a);
+    return r;
+
+  },Object.create(null));
+  const newdata22 = Object.entries(result22)
+
+
+
 
 
   //groupBy problem
@@ -32,11 +48,10 @@ function Dashboard() {
     return r;
 
   },Object.create(null));
+  const newdata2 = Object.entries(result2)
 
 
- const newdata = Object.entries(result)
 
- const newdata2 = Object.entries(result2)
 
 
 
@@ -45,7 +60,7 @@ const TotalTpm = filtedBrach.length;
 
 
 //   working tpm
- const TotalWorkingTpm = filtedBrach.filter((record: { status: string; })=>{
+ const TotalWorkingTpm = filtedBrach.filter((record: { status: string; })=>{ /// remove filter
 
  return record.status=="Already Out"
 
@@ -58,27 +73,17 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
 
   const filted = DataApi.filter((val:any)=>val.branch.toLowerCase() == branch[0].toLocaleLowerCase())
   SetFiltedBrach(filted);
-  SetfiltedBrach_Problem(filted.filter((val:{status:string})=>val.status != "Already Out"))
+  const filtedSheet2DataByBranch = DataApi2.filter((val:any)=>val.branch == branch[0])
+  SetfiltedBrach_Problem(filtedSheet2DataByBranch)
  },[branch])
 
 
-  const data = newdata.map((val:any)=>{
-     return {
-       name:val[0],
-       value:val[1].length,
-       href:"false",
-      icon:function uyo(){
-        return null
-      },
-
-     }
-  })
 
   // Inactive tpm Per branch
-  const data1 = newdata.map((val:any)=>{
+  const data1 = newdata22.map((val:any)=>{
      return {
        name:val[0],
-       value:val[1].filter((val:{ status: string;})=>val.status !=='Already Out').length,
+       InActive:val[1].length, //worked on
        href:"false",
       icon:function uyo(){
         return null
@@ -87,20 +92,21 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
      }
   })
 
-
- // comparing Both Active & InActive
   const data1al = newdata.map((val:any)=>{
+
+    //const inact = newdata22.map((val1:any)=>val1[1]==val.branchname)
      return {
        name:val[0],
-       "InActive":val[1].filter((val:{ status: string;})=>val.status !=='Already Out').length,
-       "Active":val[1].filter((val:{ status: string;})=>val.status =='Already Out').length,
+       "Active":val[1].length,
+
+       //"InActive":inact.length
        
       }
 
      
   })
 
-  
+
   
  const problems1 = newdata2.map((val)=>{
 
@@ -165,25 +171,9 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
 
 
 
-    
+
       <div className=" flex flex-col md:flex-row  w-full md:pl-60 ">
-    {/* <div className="w-fulld flex justify-center md:justify-starth ">
-      <Card className="max-w-md m-2 mt-16 h-[500px]">
-    <Title> Branch </Title>
-    <Flex className="mt-0">
-      <Text>
-        <Bold>Locations</Bold>
-      </Text>
-      <Text>
-        <Bold>Qnt</Bold>
-      </Text>
-    </Flex>
-    <BarList color={"teal"||"red"}
-     data={data} className="mt-2 " />
-    </Card>
-    </div> */}
-
-
+   
         <div className="w-full flex flex-col">
 
 
@@ -243,7 +233,7 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
 <div className="flex gap-2 md:gap-0 flex-col md:flex-row w-full items-centerh justify-center p-2">
 
       <Card className="max-w-full mx-3 mt-1 bg-[#262951]">
-    <Title className="text-white">InActive Machine Per Branch Offices</Title>
+    <Title className="text-white">InActive Terminal</Title>
     {/* <Subtitle>
       Number of Machines Waiting for Parts and Ready for collecting. 
     </Subtitle> */}
@@ -251,7 +241,7 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
       className="mt-2 text-white"
       data={data1}
       index="name"
-      categories={["value"]}
+      categories={["InActive"]}
       colors={["orange"]}
       //  valueFormatter={dataFormatter}
        yAxisWidth={45}
@@ -261,34 +251,23 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
 
 
   <Card className="bg-[#262951] text-white">
-    <Title className="text-white">Compare Active And InActive Terminal</Title>
+    <Title className="text-white">Active Terminal</Title>
     <BarChart
       className="mt-6"
       data={data1al}
       index="name"
-      categories={["InActive", "Active"]}
-      colors={["emerald", "orange",]}
+      categories={["Active"]}
+      colors={["emerald"]}
       //valueFormatter={dataFormatter}
       yAxisWidth={48}
     />
   </Card>
 
 </div>
-      
-
-
-
     </div>
-
-
-
     </div>
       </div>
       </div>
-
-
-
-    
       <Footer newdata={newdata} branch={branch} setBranch={setBranch}/>
     </div>
   )

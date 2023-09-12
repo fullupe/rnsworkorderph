@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import TimeAgo from "react-timeago"
 import { useFetchData } from './hooks/useFetchData';
 import Image from 'next/image';
+import { useFetchDataSheet2 } from './hooks/useFetchDataSheet2';
 
 
 
@@ -13,7 +14,7 @@ function Agent() {
 
     const [input, setInput] = useState<string>('')
 
-  const {DataApi,fetchReflesh,setFetchReflesh}=useFetchData()
+  const {DataApi2,fetchReflesh,setFetchReflesh}=useFetchDataSheet2()
 
   const [tpmInfo, setTpmInfo] = useState<any>('')
 
@@ -34,17 +35,27 @@ function Agent() {
     e.preventDefault()
 
 
-    DataApi.filter((val: val)=>{
+    DataApi2.find((val: { tpm: string })=>{
          if(!input){
          return val
          }else if (val.tpm == input){
-     
            setTpmInfo(val);
-           //setDataApi(val)
-           toast('Record Found!',{
-            icon:'🚀'
-          })
+          //  toast(` Tpm ${input} Already Out`,{
+          //    toastId:"error",
+          //    icon:'🚀',
+          //  })
+           setInput('')
+           
+        }else{
+          
+        //   toast('NO Record Found!',{
+        //     toastId:"success",
+        //    icon:'🚀',
+        //  })
+          
+
          }
+         setInput('')
        })
        setReflesh(!reflesh)
 

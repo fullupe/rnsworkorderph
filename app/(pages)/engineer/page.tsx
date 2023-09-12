@@ -10,16 +10,16 @@ import { Select, SelectItem } from "@tremor/react";
 
 
 
-import {useFetchData} from  "../../hooks/useFetchData"
+import {useFetchDataSheet2} from  "../../hooks/useFetchDataSheet2"
 
 import {useChangeStatus} from  "../../hooks/useChangeStatus"
 
 function Engineer() {
 
-  const {updateRecords, Loading,SetLoading}=useChangeStatus()
+  const {updateSheet2_Status, Loading}=useChangeStatus()
   
 
-  const {DataApi, fetchReflesh, setFetchReflesh}=useFetchData()
+  const {DataApi2, fetchReflesh, setFetchReflesh}=useFetchDataSheet2()
 
     const [input, setInput] = useState<string>('')
 
@@ -30,7 +30,7 @@ function Engineer() {
 
   const handleSearch =(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
-    DataApi.filter((val: { tpm: string }) => {
+    DataApi2.filter((val: { tpm: string }) => {
       if (!input) {
         return val
       } else if (val.tpm == input) {
@@ -38,6 +38,7 @@ function Engineer() {
         setTpmInfo(val)
         toast('Record Found!', {
           icon: '🚀',
+          
         })
       }
     })
@@ -49,22 +50,19 @@ function Engineer() {
   const handleSubmit =(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
      e.preventDefault()
     const request = {
-      // tpm:tpmInfo.tpm,
-      // agentName:tpmInfo.agentName,
-      // status:newstatus,
-      // branch:tpmInfo.branch,
-      // createdAt: new Date(),
+     
       ...tpmInfo,
       status:newstatus,
       createdAt: new Date(),
       }
-      updateRecords(request)
+      updateSheet2_Status(request)
       
       setInput("")
       setNewstatus("")
+
       setFetchReflesh(!fetchReflesh)
 
-      SetLoading(false)
+      //SetLoading(false)
       
 
   }
@@ -74,7 +72,7 @@ function Engineer() {
   tpmInfo.status == 'Water Entered' ? 'bg-[#877FBF] text-white' :// @ts-ignore 
  
   tpmInfo.status == 'On Test' ? 'bg-[#315EA7] text-white' :  // @ts-ignore 
-  // row.original.status == 'See Management' ? 'bg-red-900' :// @ts-ignore 
+
   tpmInfo.status == 'Waiting for Part' ? 'bg-[#8EEEF7] text-whited' :// @ts-ignore 
   
   "bg-[#E7223B] text-white ";

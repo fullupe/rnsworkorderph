@@ -5,6 +5,7 @@ import { BarList, Card, Title, Bold, Flex, Text, Metric, CategoryBar, Legend,Don
 import { useFetchData } from '../hooks/useFetchData';
 import { useUserContext } from '../context/userContex';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
+import { useFetchDataSheet2 } from '../hooks/useFetchDataSheet2';
 
 function Dashboard() {
 
@@ -22,11 +23,15 @@ function Dashboard() {
   const [filtedBrach_Problem, SetfiltedBrach_Problem]=useState([])
 
   const {DataApi}=useFetchData()
+  const {DataApi2, }=useFetchDataSheet2()
 
   const getUserBranch=()=>{
       const filted = DataApi.filter((val:any)=>val.branch == branchName)
       SetFiltedBrach(filted);
-       SetfiltedBrach_Problem(filted.filter((val:{status:string})=>val.status != "Already Out"))
+
+      const filtedSheet2DataByBranch = DataApi2.filter((val:any)=>val.branch == branchName)
+
+       SetfiltedBrach_Problem(filtedSheet2DataByBranch)
     }
 
   useEffect(()=>{
@@ -102,7 +107,7 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
         <div className="w-full flex flex-col">
 
 
-    <p className="flex justify-center items-center uppercase  mt-4 ">{branchName} <span className="mx-2 uppercase ">office</span></p>
+    <p className="flex justify-center items-center uppercase  mt-4  text-white">{branchName} <span className="mx-2 uppercase text-white ">office</span></p>
     <hr className="flex bg-gray-300 h-0.5 mt-2 "/>
     <div className="flex flex-wrap md:flex-rowd w-full justify-center items-center md:items-baseline text-white  ">
 
