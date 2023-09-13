@@ -37,7 +37,7 @@ function Receiptionist() {
     if (foundItem) {
       // Match found
       setTpmInfo(foundItem);
-      setInput('');
+      //setInput('');
       
       toast('Record Found!', {
         toastId: 'success',
@@ -45,7 +45,7 @@ function Receiptionist() {
       });
     } else {
       // No match found
-      toast(`Tpm ${input} Already Out`, {
+      toast(`Tpm ${input} is Not a Valid Terminal`, {
         toastId: 'error',
         icon: '🚀',
       });

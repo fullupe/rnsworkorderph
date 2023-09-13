@@ -30,19 +30,28 @@ function Engineer() {
 
   const handleSearch =(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
-    DataApi2.filter((val: { tpm: string }) => {
-      if (!input) {
-        return val
-      } else if (val.tpm == input) {
-        //return val
-        setTpmInfo(val)
-        toast('Record Found!', {
-          icon: '🚀',
-          
-        })
-      }
-    })
-    setFetchReflesh(!fetchReflesh)
+
+
+    const foundItem = DataApi2.find((val: { tpm: string }) => val.tpm == input);
+
+    if (foundItem) {
+      // Match found
+      setTpmInfo(foundItem);
+      //setInput('');
+      
+      toast('Record Found!', {
+        toastId: 'success',
+        icon: '🚀',
+      });
+    } else {
+      // No match found
+      toast(`Tpm ${input} is Already Out`, {
+        toastId: 'error',
+        icon: '🚀',
+      });
+    }
+  
+        setFetchReflesh(!fetchReflesh)
 
 
   }
