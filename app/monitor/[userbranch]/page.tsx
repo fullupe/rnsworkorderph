@@ -14,7 +14,7 @@ function Monitor({params}:{params:{userbranch:string}}) {
 
   //const {DataApi}=useFetchData()
 
-  const {DataApi2, fetchReflesh, setFetchReflesh}=useFetchDataSheet2()
+  const {DataApi2}=useFetchDataSheet2()
   
   
      const branchInActive = DataApi2.filter((val:any)=>val.branch.toLowerCase() == params.userbranch.toLocaleLowerCase())
