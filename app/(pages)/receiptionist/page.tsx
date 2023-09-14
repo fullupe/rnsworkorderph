@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import {useFetchData} from  "../../hooks/useFetchData"
 import {useChangeStatus} from  "../../hooks/useChangeStatus"
 import { useUserContext } from '@/app/context/userContex'
+import { useFetchDataSheet2 } from '@/app/hooks/useFetchDataSheet2';
 
 
 function Receiptionist() {
@@ -17,13 +18,17 @@ function Receiptionist() {
   const [activeUser,setActiveUser]=useState('')
 
   useEffect(()=>{
-    // @ts-ignore
-    setActiveUser(user.username)
+   if(user){
+
+     setActiveUser(user.username);
+   }
   },[])
 
   const {add_To_Sheet2,delete_From_Sheet2, Loading}=useChangeStatus()
   
   const {DataApi,fetchReflesh,setFetchReflesh}=useFetchData()
+
+  const {DataApi2, fetchReflesh2, setFetchReflesh2}=useFetchDataSheet2()
   
   const [input, setInput] = useState<string>('')
   
@@ -66,6 +71,7 @@ function Receiptionist() {
 
       add_To_Sheet2(request)
       setInput("")
+      setFetchReflesh2(!fetchReflesh2)
   }
 
   const handleSubmitOut= async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
@@ -76,6 +82,7 @@ function Receiptionist() {
 
     delete_From_Sheet2(request)
     setInput("")
+    setFetchReflesh2(!fetchReflesh2)
 
   }
 

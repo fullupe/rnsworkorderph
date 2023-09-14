@@ -16,21 +16,24 @@ import {useChangeStatus} from  "../../hooks/useChangeStatus"
 
 function Engineer() {
 
+  
+  
+  
+  const [input, setInput] = useState<string>('')
+  
+  const [newstatus, setNewstatus] = useState<string>('')
+  
+  const [tpmInfo, setTpmInfo] = useState<any>('')
+  
+  
   const {updateSheet2_Status, Loading}=useChangeStatus()
   
-
-  const {DataApi2, fetchReflesh, setFetchReflesh}=useFetchDataSheet2()
-
-    const [input, setInput] = useState<string>('')
-
-    const [newstatus, setNewstatus] = useState<string>('')
-
-   const [tpmInfo, setTpmInfo] = useState<any>('')
-
-
+  const {DataApi2, fetchReflesh2, setFetchReflesh2}=useFetchDataSheet2()
+  
   const handleSearch =(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
 
+    setFetchReflesh2(!fetchReflesh2)
 
     const foundItem = DataApi2.find((val: { tpm: string }) => val.tpm == input);
 
@@ -51,7 +54,7 @@ function Engineer() {
       });
     }
   
-        setFetchReflesh(!fetchReflesh)
+    setFetchReflesh2(!fetchReflesh2)
 
 
   }
@@ -69,7 +72,7 @@ function Engineer() {
       setInput("")
       setNewstatus("")
 
-      setFetchReflesh(!fetchReflesh)
+      setFetchReflesh2(true)
 
       //SetLoading(false)
       

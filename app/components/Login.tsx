@@ -5,6 +5,7 @@ import React, {useState } from 'react'
 import {useRouter } from 'next/navigation'
 import { useGetUsers } from '../hooks/useGetUsers';
 import {useUserContext} from "../../app/context/userContex"
+import { ColorRing } from  'react-loader-spinner';
 
 let CryptoJS = require("crypto-js");
 const ENCRYTION_KEY:string = process.env.NEXT_PUBLIC_ENCRYPTION_SECRET as string
@@ -92,7 +93,9 @@ function Login({}:Props) {
         <h1 className="text-2xl font-bold mb-6 capitalize flex-1 ">Login As <span className="text-xs border-b pb-1 border-gray-300 text-gray-600 ">
             </span></h1>
 
-            {isAuth && <p>Loading..</p>}
+           
+
+
         </div>
         <form onSubmit={handleLogin}>
             <div className="mb-4">
@@ -111,6 +114,20 @@ function Login({}:Props) {
                     id="password" type="password" placeholder="Enter your password"/>
             <p className=" flex mt-2  text-center w-full items-center justify-center text-xs text-red-900">{error}</p>
 
+            </div>
+
+            <div className="flex w-full items-center justify-center">
+            {isAuth && 
+            <ColorRing
+                    visible={true}
+                    height="60"
+                    width="60"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{ marginTop:"0"}}
+                    wrapperClass="blocks-wrapper"
+                    colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                />
+                }
             </div>
 
             <div className="flex gap-2">

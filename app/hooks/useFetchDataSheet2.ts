@@ -5,7 +5,7 @@ const URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string
 
 export const useFetchDataSheet2=()=>{
 
-    const [fetchReflesh, setFetchReflesh] = useState<boolean>(false)
+    const [fetchReflesh2, setFetchReflesh2] = useState<boolean>(false)
 
     const [DataApi2, setDataApi2] = useState<any>([])
 
@@ -22,9 +22,9 @@ export const useFetchDataSheet2=()=>{
     
     httpGet(URL)
 
-  }, [fetchReflesh])
+  },[fetchReflesh2,URL])
 
 
-  return {DataApi2,fetchReflesh, setFetchReflesh}
+  return {DataApi2,fetchReflesh2, setFetchReflesh2}
 
 }

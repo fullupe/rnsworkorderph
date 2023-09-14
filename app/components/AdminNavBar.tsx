@@ -7,16 +7,13 @@ import React, { useContext } from 'react'
 
 function AdminNavBar() {
 
-  const {user,setUser}=useUserContext()
+  const {user}=useUserContext()
     
     const handleReflesh = ()=>{
        
         window.location.reload()
     }
-
-    // @ts-ignore
-    // console.log(user.username)
-    const loginname = user.username
+    const loginname = user?.username
 
   return (
     <div className="w-full fixed z-20 flex h-12 items-center  bg-gray-200 shadow-lg justify-center">

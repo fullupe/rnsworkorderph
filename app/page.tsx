@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ToastContainer, toast } from 'react-toastify';
 import TimeAgo from "react-timeago"
-import { useFetchData } from './hooks/useFetchData';
+
 import Image from 'next/image';
 import { useFetchDataSheet2 } from './hooks/useFetchDataSheet2';
-
 
 
 
@@ -14,13 +13,9 @@ function Agent() {
 
     const [input, setInput] = useState<string>('')
 
-  const {DataApi2,fetchReflesh,setFetchReflesh}=useFetchDataSheet2()
+  const {DataApi2,fetchReflesh2,setFetchReflesh2}=useFetchDataSheet2()
 
   const [tpmInfo, setTpmInfo] = useState<any>('')
-
-  const [reflesh, setReflesh] = useState<boolean>(false)
-
-  //const URL:string = process.env.NEXT_PUBLIC_BASE_URL as string
 
 
   interface val  { 
@@ -52,6 +47,8 @@ function Agent() {
         icon: '🚀',
       });
     }
+
+    setFetchReflesh2(!fetchReflesh2)
 
     
    }

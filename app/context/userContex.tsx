@@ -15,8 +15,8 @@ type userType={
 
 type UserContextType={
    
-    user:userType[];
-    setUser:Dispatch<SetStateAction<userType[]>>;
+    user:userType | undefined; // Start with undefined;
+    setUser:Dispatch<SetStateAction<userType | undefined>>;
 
     isAuth:boolean;
     setIsAuth:(isAuth:boolean)=>void
@@ -25,11 +25,11 @@ type UserContextType={
 
  const UserContext = createContext<UserContextType>({
    
-    user:[],
-    setUser:():userType[] =>[],
+    user:undefined,
+    setUser:() =>{},
 
     isAuth:false,
-    setIsAuth:(isAuth:boolean)=>isAuth
+    setIsAuth:()=>{}
 
 
 
@@ -38,7 +38,7 @@ type UserContextType={
 
 export const UserContextProvider = ({children}:any)=>{
 
-const [user, setUser] = useState<[] | userType[]>([])
+const [user, setUser] = useState<userType | undefined>(undefined)
 const [isAuth, setIsAuth]=useState<boolean>(false)
 
 return(
