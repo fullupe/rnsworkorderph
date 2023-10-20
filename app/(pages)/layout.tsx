@@ -33,10 +33,10 @@ if(!isAuth)  return <>
 // } 
  
   return (
-    <html lang="en">
-      <body className={inter.className}>
+   
+      <div>
         {children}
-        </body>
-    </html>
+        </div>
+ 
   )
 }

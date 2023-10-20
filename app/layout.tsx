@@ -35,6 +35,6 @@ export default function RootLayout({
         </UserContextProvider>
         
         </body>
-     </html>
+  </html>
   )
 }

@@ -20,22 +20,25 @@ export const useGetUsers=()=>{
    const [passCodeFromDatabase,setPassCodeFromDatabas]= useState<passData[]>([])
 
    // getting the users From Database
-   function httpGetPassCode(URL: string | URL) {
-    var xmlHttp = new XMLHttpRequest()
-    xmlHttp.open('GET', URL, false) // false for synchronous request
-    //xmlHttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xmlHttp.send(null)
-    const ApiPassCodeData = JSON.parse(xmlHttp.responseText)
-    setPassCodeFromDatabas(ApiPassCodeData.data)
+   async function httpGetPassCode() {
+
+    // var xmlHttp = new XMLHttpRequest()
+    // xmlHttp.open('GET', URL, false) // false for synchronous request
+    // //xmlHttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    // xmlHttp.send(null)
+    // const ApiPassCodeData = JSON.parse(xmlHttp.responseText)
+
+    const userData =  await  fetch("/api/fetchusers").then((res)=>res.json().then(data=>data.data))
+
+
+    setPassCodeFromDatabas(userData)
   }
 
   useEffect(()=>{
-    httpGetPassCode(`${Base_URL}getPass`)
+    httpGetPassCode()
   },[Base_URL])
 
-        
-      
-  
+
     return {passCodeFromDatabase}
   
   }
