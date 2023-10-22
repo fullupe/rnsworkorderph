@@ -19,14 +19,18 @@ export const useFetchDataSheet2=()=>{
     // xmlHttp.send(null)
 
     
-    const Data =  await  axios.get("/api/fetchdatasheet2").then((res:any)=>res.json().then((data: { data: any; })=>data.data))
+    //const Data =  await  axios.get("/api/fetchdatasheet2").then((res:any)=>res.json().then((data: { data: any; })=>data.data))
+
+    axios.get("/api/fetchdatasheet2").then((res:any)=>{
+      let Data =res.json().then((data:any)=>data.data)
+      setDataApi2(Data)
+    })
 
 
     //console.log("saa",userData)
 
     //const ApiData = JSON.parse(xmlHttp.responseText)
     
-    setDataApi2(Data)
    
   }
 
