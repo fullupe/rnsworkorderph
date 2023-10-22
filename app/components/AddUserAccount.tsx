@@ -11,7 +11,7 @@ import {CalculatorIcon } from '@heroicons/react/24/outline'
 import { useFetchBrache } from '../hooks/useFetchBranch';
 let CryptoJS = require("crypto-js");
 
-const Base_URL:string = process.env.NEXT_PUBLIC_BASE_URL_USER as string
+const Base_URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string
 const ENCRYTION_KEY:string = process.env.NEXT_PUBLIC_ENCRYPTION_SECRET as string
 
 
