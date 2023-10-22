@@ -1,5 +1,7 @@
-"use client"
+
 import { useEffect, useState } from "react"
+
+const axios = require('axios');
 
 
 //const URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string
@@ -17,7 +19,7 @@ export const useFetchDataSheet2=()=>{
     // xmlHttp.send(null)
 
     
-    const Data =  await  fetch("/api/fetchdatasheet2",{ cache: 'no-store' }).then((res)=>res.json().then(data=>data.data))
+    const Data =  await  axios.get("/api/fetchdatasheet2").then((res:any)=>res.json().then((data: { data: any; })=>data.data))
 
 
     //console.log("saa",userData)
