@@ -4,6 +4,8 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ToastContainer, toast } from 'react-toastify';
 import TimeAgo from "react-timeago"
 
+import DarkModeToggle from "./components/DarkModeToggle"
+
 import Image from 'next/image';
 import { useFetchDataSheet2 } from './hooks/useFetchDataSheet2';
 
@@ -73,6 +75,7 @@ function Agent() {
 
   return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#F7CAD5] to-indigo-300 ">
+       
     <div
     className={`py-2  px-6 bg-whitee bg-gradient-to-r from-sky-500 to-indigo-500 shadow-2xl h-[85%] md:max-w-md !important text-lg rounded-2xl relativee  flex flex-col h leading- w-[98%]  text-white mt-8 mb-12 overflow-hidden absolute`}
   >
@@ -82,7 +85,8 @@ function Agent() {
       <div className=" h- bg-gray-00  items-center flex flex-col mt-6 ">
         <p className="text-gray-900 text-2xl font-bold border-b mb-6 font-poppins italic ">
       
-          Maintenance Check 📮 {' '}
+          Maintenance Check 📮 {' '} 
+          {/* <DarkModeToggle/> */}
         </p>
 
         <form onSubmit={handleSearch} className="flex items-center mt-3 space-x-3 mb-4">

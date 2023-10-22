@@ -14,28 +14,31 @@ interface passData {
 
 export const useGetUsers=()=>{
 
-    const Base_URL:string = process.env.NEXT_PUBLIC_BASE_URL_USER as string
+    const Base_URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string
 
 
    const [passCodeFromDatabase,setPassCodeFromDatabas]= useState<passData[]>([])
 
    // getting the users From Database
-   async function httpGetPassCode() {
+   async function httpGetPassCode(URL: string | URL) {
 
-    // var xmlHttp = new XMLHttpRequest()
-    // xmlHttp.open('GET', URL, false) // false for synchronous request
-    // //xmlHttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    // xmlHttp.send(null)
-    // const ApiPassCodeData = JSON.parse(xmlHttp.responseText)
-
-    const userData =  await  fetch("/api/fetchusers").then((res)=>res.json().then(data=>data.data))
+    var xmlHttp = new XMLHttpRequest()
+    xmlHttp.open('GET', URL, false) // false for synchronous request
+    //xmlHttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xmlHttp.send(null)
+    const ApiPassCodeData = JSON.parse(xmlHttp.responseText)
 
 
-    setPassCodeFromDatabas(userData)
+
+
+
+    //const userData =  await  fetch("/api/fetchusers").then((res)=>res.json().then(data=>data.data))
+
+    setPassCodeFromDatabas(ApiPassCodeData.data)
   }
 
   useEffect(()=>{
-    httpGetPassCode()
+    httpGetPassCode(`${Base_URL}getPass`)
   },[Base_URL])
 
 

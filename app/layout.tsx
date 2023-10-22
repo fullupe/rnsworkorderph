@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {UserContextProvider} from "../app/context/userContex";
+import { ThemeProvider } from './components/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,13 +28,21 @@ export default function RootLayout({
 }) {
  
   return (
+    
     <html lang="en">
       <body className={inter.className }>
+      <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+      >
        
         <UserContextProvider>
           {children}
         </UserContextProvider>
         
+    </ThemeProvider>
         </body>
   </html>
   )
