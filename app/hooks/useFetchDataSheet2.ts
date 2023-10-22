@@ -21,10 +21,16 @@ export const useFetchDataSheet2=()=>{
     
     //const Data =  await  axios.get("/api/fetchdatasheet2").then((res:any)=>res.json().then((data: { data: any; })=>data.data))
 
-    axios.get("/api/fetchdatasheet2").then((res:any)=>{
-      let Data =res.json().then((data:any)=>data.data)
-      setDataApi2(Data)
-    })
+    try {
+      const response = await axios.get("/api/fetchdatasheet2");
+      const data = response.data;
+      setDataApi2(data.data);
+
+      //console.log(data.data);
+    } catch (error) {
+      // Handle any errors, e.g., network issues or failed requests
+      console.error("Error fetching data:", error);
+    }
 
 
     //console.log("saa",userData)

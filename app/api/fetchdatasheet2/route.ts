@@ -6,7 +6,7 @@ const URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string
 
 export async function GET(req: Request, res: Response){
 
-    const response = await axios.get(`${URL}getDataFromSheet2`,{ cache: 'no-store' })
+    const response = await fetch(`${URL}getDataFromSheet2`,{ cache: 'no-store' })
     const sheet2Data = await response.json()
     
 return new Response(JSON.stringify(sheet2Data))
