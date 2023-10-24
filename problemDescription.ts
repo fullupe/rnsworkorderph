@@ -126,6 +126,10 @@ export const options:Option[] = [
         value:"Default restored"
     },
     {
+        label:"Tpm Need To Be Service",
+        value:"Tpm Need To Be Service"
+    },
+    {
         label:"Bad transport card",
         value:"Bad transport card"
     },

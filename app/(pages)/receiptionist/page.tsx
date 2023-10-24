@@ -52,7 +52,7 @@ function Receiptionist() {
   const [problemDesc, setProblemDesc] = useState<string[]>([])
 
 
-  console.log(problemDesc)
+  //console.log(problemDesc)
   
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -244,7 +244,7 @@ function Receiptionist() {
         
             </div>
 
-            <PrintProDesc componentRef={componentRef} tpm={tpmInfo.tpm} problem={problemDesc} receivedBy={activeUser}/>
+            <PrintProDesc componentRef={componentRef} tpm={tpmInfo.tpm} agentName={tpmInfo.agentName} problem={problemDesc} receivedBy={activeUser}/>
 
         <div className=" flex flex-col  w-full bg-yellow-00 pb-8 ">
           <div className=" flex  w-full justify-center space-x-4 items-center bg-red-00">
