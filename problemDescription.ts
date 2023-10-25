@@ -38,6 +38,14 @@ export const options:Option[] = [
         value:"Not printing "
     },
     {
+        label:"Blank printing ",
+        value:"Blank printing "
+    },
+    {
+        label:"Screen Problem ",
+        value:"Screen Problem "
+    },
+    {
         label:"Bad printing",
         value:"Bad printing"
     },
