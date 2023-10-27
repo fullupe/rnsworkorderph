@@ -13,6 +13,7 @@ return new Response(JSON.stringify(Data))
 
 
 }
+export const revalidate =0;
 
 
 // export async function POST(req: Request, res: Response){

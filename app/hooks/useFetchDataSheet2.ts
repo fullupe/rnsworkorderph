@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 
-const URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string
+//const URL:string = process.env.NEXT_PUBLIC_BASE_URL_DATA as string
 
 export const useFetchDataSheet2=()=>{
 
@@ -9,18 +9,18 @@ export const useFetchDataSheet2=()=>{
 
     const [DataApi2, setDataApi2] = useState<any>([])
 
-  async  function httpGet() {
+    async  function httpGet() {
 
-    var xmlHttp = new XMLHttpRequest()
-    xmlHttp.open('GET', `${URL}getDataFromSheet2`, false) // false for synchronous request
-    xmlHttp.send(null)
-    const ApiData = JSON.parse(xmlHttp.responseText)
+    // var xmlHttp = new XMLHttpRequest()
+    // xmlHttp.open('GET', `${URL}getDataFromSheet2`, false) // false for synchronous request
+    // xmlHttp.send(null)
+    // const ApiData = JSON.parse(xmlHttp.responseText)
 
-    // const Data =  await fetch("/api/fetchLiveData").then((res)=>res.json().then(data=>data.data))
+    const ApiData =  await fetch("/api/fetchLiveData").then((res)=>res.json().then(data=>data.data))
 
-    setDataApi2(ApiData.data)
+    setDataApi2(ApiData)
     
-    //const Data =  await  axios.get("/api/fetchdatasheet2").then((res:any)=>res.json().then((data: { data: any; })=>data.data))
+    
   }
 
   useEffect(() => {

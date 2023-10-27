@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react"
 import { useUserContext } from "../context/userContex"
 import { useChangeStatus } from "./useChangeStatus"
@@ -22,17 +23,15 @@ export const useFetchData=()=>{
 
     async function httpGet() {
 
-    var xmlHttp = new XMLHttpRequest()
-    xmlHttp.open('GET', `${URL}getData`, false) // false for synchronous request
-    //xmlHttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-    xmlHttp.send(null)
-    const ApiData = JSON.parse(xmlHttp.responseText)
+    // var xmlHttp = new XMLHttpRequest()
+    // xmlHttp.open('GET', `${URL}getData`, false) // false for synchronous request
+    // xmlHttp.send(null)
+    // const ApiData = JSON.parse(xmlHttp.responseText)
 
-
-    //const Data =  await fetch("/api/fetchMainData").then((res)=>res.json().then(data=>data.data))
+    const ApiData =  await fetch("/api/fetchMainData").then((res)=>res.json().then(data=>data.data))
     //const branchDAta = Data.filter((B_data:any)=>B_data.branch == activeUserBranchName)
 
-    setDataApi(ApiData.data)
+    setDataApi(ApiData)
    
   }
 
@@ -40,7 +39,7 @@ export const useFetchData=()=>{
     
     httpGet()
 
-  }, [])
+  }, [fetchReflesh])
 
 
   return {DataApi,fetchReflesh, setFetchReflesh}

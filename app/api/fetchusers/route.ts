@@ -12,6 +12,8 @@ return new Response(JSON.stringify(sheet2Data))
 
 }
 
+export const revalidate =0;
+
 
 
 

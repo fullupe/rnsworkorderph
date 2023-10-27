@@ -11,7 +11,7 @@ export async function GET(req: Request, res: Response){
 return new Response(JSON.stringify(sheet2Data))
 
 }
-
+export const revalidate =0;
 
 // export async function POST(req: Request, res: Response){
 
