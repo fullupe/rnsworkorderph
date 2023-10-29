@@ -31,11 +31,13 @@ function Receiptionist() {
   const {user}=useUserContext()
 
   const [activeUser,setActiveUser]=useState('')
+ 
 
   useEffect(()=>{
    if(user){
 
      setActiveUser(user.username);
+     
    }
   },[])
 
@@ -108,10 +110,6 @@ function Receiptionist() {
 
   }
 
-  //const handleSelectChange = (selected:string[]) => {
-   
-    //setProblemDesc(selected);
-  //};
 
   return (
     <div className="flex min-h-screen justify-center items-center bg-red-100">
@@ -228,20 +226,7 @@ function Receiptionist() {
                
             />
 
-            {/* <MultiSelect
-            className="z-50 pb-20 flex"
-             options={options}
-             value={problemDesc} // @ts-ignore
-             onChange={handleSelectChange} 
-            >
-
-              {options.map((option) => (
-                <MultiSelectItem key={option.value} value={option.value} />
-                ))}
-              
-            </MultiSelect> */}
-        
-        
+          
             </div>
 
             <PrintProDesc componentRef={componentRef} tpm={tpmInfo.tpm} agentName={tpmInfo.agentName} problem={problemDesc} receivedBy={activeUser}/>
