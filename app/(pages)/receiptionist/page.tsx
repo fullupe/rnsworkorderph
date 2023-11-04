@@ -71,7 +71,7 @@ function Receiptionist() {
       });
     } else {
       // No match found
-      toast(`Tpm ${input} is Not a Valid Terminal`, {
+      toast(`Tpm ${input} is Not a Valid Terminal in Your Branch`, {
         toastId: 'error',
         icon: '🚀',
       });
