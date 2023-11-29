@@ -173,6 +173,60 @@ export const options:Option[] = [
         label:"Smartcard",
         value:"Smartcard"
     },
+
+    // ............
+    {
+        label:"Screen Light",
+        value:"Screen Light"
+    },
+    {
+        label:"Broken roller",
+        value:"Broken roller"
+    },
+    {
+        label:"Broken Screen Case",
+        value:"Broken Screen Case"
+    },
+    {
+        label:"Damaged Roller Wires",
+        value:"Damaged Roller Wires"
+    },
+    {
+        label:"Display",
+        value:"Display"
+    },
+    {
+        label:"Physical Damage",
+        value:"Physical Damage"
+    },
+    {
+        label:"Print SomeTimes",
+        value:"Print SomeTimes"
+    },
+    {
+        label:"Remove Card Error",
+        value:"Remove Card Error"
+    },
+    {
+        label:"Too Old Configuration",
+        value:"Too Old Configuration"
+    },
+    {
+        label:"Upgrade",
+        value:"Upgrade"
+    },
+    {
+        label:"Sales Error",
+        value:"Sales Error"
+    },
+    {
+        label:"Weak Battery",
+        value:"Weak Battery"
+    },
+    {
+        label:"Water Damage",
+        value:"Water Damage"
+    },
     
 ]
 
