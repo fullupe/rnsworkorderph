@@ -11,6 +11,16 @@ type Props = {
     createdAt: Date;
 
 }
+type HistoryProps = {
+    tpm: string;
+    agentName: string;
+    branch: string;
+    problem_desc:string;
+    eng:string,
+    dateIn:Date;
+    dateOut:Date;
+    received_by:string;
+}
 
 type DeletProps={
   tpm:string
@@ -53,6 +63,38 @@ export const useChangeStatus=()=>{
    
 
  }
+  const addToHistory=  (history:HistoryProps)=>{
+    
+    const xmlHttp = new XMLHttpRequest()
+      xmlHttp.open('POST', `${Base_URL}addTpmHistory`, true) // false for synchronous request
+   
+    if(xmlHttp.readyState==1){
+      SetLoading(true)
+    }else {
+      SetLoading(false)
+    }
+
+     xmlHttp.send(JSON.stringify(history)) // Make sure to stringify
+    
+    xmlHttp.onload = function (){
+    
+        SetLoading(false)
+    
+
+      toast('Records Updated!', {
+        icon: '🚀',
+      })
+    }
+    
+    xmlHttp.onerror = function () {
+   
+      //console.log(xmlHttp.responseText)
+    }
+   
+
+ }
+
+
   const delete_From_Sheet2= (request:DeletProps)=>{
     
     const xmlHttp = new XMLHttpRequest()
@@ -146,6 +188,6 @@ export const useChangeStatus=()=>{
 
 
 
-    return { Loading,SetLoading,add_To_Sheet2,delete_From_Sheet2,updateSheet2_Status,updateRealocate}
+    return { Loading,SetLoading,add_To_Sheet2,delete_From_Sheet2,updateSheet2_Status,updateRealocate,addToHistory}
 
 }

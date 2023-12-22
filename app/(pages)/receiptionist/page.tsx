@@ -53,8 +53,9 @@ function Receiptionist() {
 
   const [problemDesc, setProblemDesc] = useState<string[]>([])
 
-
-  //console.log(problemDesc)
+  // problem description array to string 
+  const pblem =problemDesc.map((val:string|any)=>val.value).toString()
+  //const [pblem, setpblem] = useState(problemDesc.map((val:string|any)=>val.value).toString())
   
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -86,7 +87,8 @@ function Receiptionist() {
       ...tpmInfo,
       status:"Working On",
       createdAt: new Date(),
-      ruser:activeUser
+      ruser:activeUser,
+      problem_desc: pblem
     }
 
       add_To_Sheet2(request)

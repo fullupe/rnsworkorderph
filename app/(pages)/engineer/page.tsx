@@ -1,20 +1,44 @@
 
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TimeAgo from 'react-timeago'
 import { ToastContainer, toast } from 'react-toastify';
-import { MagnifyingGlassIcon,CalculatorIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon,CalculatorIcon,ClockIcon } from '@heroicons/react/24/outline'
 import { Circles } from 'react-loader-spinner';
 
 import { Select, SelectItem } from "@tremor/react";
 
-
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 import {useFetchDataSheet2} from  "../../hooks/useFetchDataSheet2"
 
 import {useChangeStatus} from  "../../hooks/useChangeStatus"
+import { useUserContext } from '@/app/context/userContex';
 
 function Engineer() {
+
+
+  const {user}=useUserContext()
+
+  const [activeUser,setActiveUser]=useState('')
+ 
+
+  useEffect(()=>{
+   if(user){
+
+     setActiveUser(user.username);
+     
+   }
+  },[])
 
   
   
@@ -26,7 +50,7 @@ function Engineer() {
   const [tpmInfo, setTpmInfo] = useState<any>('')
   
   
-  const {updateSheet2_Status, Loading}=useChangeStatus()
+  const {updateSheet2_Status,addToHistory, Loading}=useChangeStatus()
   
   const {DataApi2, fetchReflesh2, setFetchReflesh2}=useFetchDataSheet2()
   
@@ -41,6 +65,7 @@ function Engineer() {
       // Match found
       setTpmInfo(foundItem);
       //setInput('');
+      console.log(foundItem)
       
       toast('Record Found!', {
         toastId: 'success',
@@ -66,6 +91,7 @@ function Engineer() {
       ...tpmInfo,
       status:newstatus,
       createdAt: new Date(),
+      eng:activeUser,
       }
       updateSheet2_Status(request)
       
@@ -75,11 +101,29 @@ function Engineer() {
       setFetchReflesh2(true)
 
       //SetLoading(false)
+
+      if(newstatus == "Ready ✅"){
+
+        const history ={
+          tpm:tpmInfo.tpm,
+          agentName:tpmInfo.agentName,
+          branch:tpmInfo.branch,
+          problem_desc:tpmInfo.problem_desc,
+          eng:activeUser,
+          dateIn:tpmInfo.createdAt,
+          dateOut:new Date(),
+          received_by:tpmInfo.ruser
+        }
+
+        addToHistory(history)
+      }
       
+      console.log(history)
 
   }
 
-  const statusColor = tpmInfo.status == 'Ready ✅' ? 'bg-[#00C600] text-white' : // @ts-ignore 
+
+  const statusColor = tpmInfo.status == 'Ready ✅' ? 'bg-[#00C600] text-white' : //@ts-ignore 
   tpmInfo.status == 'Working On' ? 'bg-[#152E61] text-white' : // @ts-ignore 
   tpmInfo.status == 'Water Entered' ? 'bg-[#877FBF] text-white' :// @ts-ignore 
  
@@ -99,10 +143,60 @@ function Engineer() {
     >
       <ToastContainer />
       <div className="felx flex-col space-y-2">
+        <div className=" justify-center  pr-2 items-end flex flex-col cursor-pointer">
+        
+        <Dialog>
+          
+      <DialogTrigger asChild>
+        {/* <Button variant="outline">Edit Profile</Button> */}
+        <ClockIcon className="w-6 h-6 mr-2 text-white border-2 border-white hover:border-gray-700 bg-gray-900 "/>
+    
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you're done.
+          </DialogDescription>
+        </DialogHeader>
+        {/* <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input
+              id="name"
+              defaultValue="Pedro Duarte"
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Username
+            </Label>
+            <Input
+              id="username"
+              defaultValue="@peduarte"
+              className="col-span-3"
+            />
+          </div>
+        </div> */}
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+      <p className="text-[9px] -mt-2 text-gray-300">TPM History</p>
+    </Dialog>
+        
+        
+        
+     
+        </div>
        
         
-        <div className=" h-96 bg-gray-00  items-center flex flex-col pt-8 mb-20 ">
-          <p className="text-gray-900 text-2xl font-bold font-poppins border-b mb-4">
+        <div className=" h-96 bg-gray-00  items-center flex flex-col  mb-20 ">
+          
+          <p className="text-gray-900 text-2xl font-bold font-poppins border-b mb-2">
             Engineers Check
           </p>
 
@@ -195,7 +289,7 @@ function Engineer() {
           </div>
         </div>
 
-        <hr />
+        {/* <hr /> */}
 
         <form className=" flex flex-col h-full w-full bg-yellow-00 p-4 space-y-3">
          

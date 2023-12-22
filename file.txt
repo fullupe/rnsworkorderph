@@ -1,0 +1,4 @@
+NEXT_PUBLIC_BASE_URL_DATA=https://script.google.com/macros/s/AKfycbxoomvzj_HOzD7f7IyW42cVPXiIcLPRhUlWTeX4HsYP2dNdYUGmQY6UpKIvFjsN6iWkNQ/exec?action=
+
+https://script.google.com/macros/s/AKfycbzONHDnmTVQz5Kmp9WXH-zNgAw5sni39oYw8diDcmdUfHcj8PQ2ktKq2wSafdjF-Njy4w/exec?action=
+https://script.google.com/macros/s/AKfycbxoomvzj_HOzD7f7IyW42cVPXiIcLPRhUlWTeX4HsYP2dNdYUGmQY6UpKIvFjsN6iWkNQ/exec?action=
