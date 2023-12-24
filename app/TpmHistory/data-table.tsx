@@ -94,10 +94,9 @@ function TpmHistoryTable<TData, TValue>({columns,data}: DataTableProps<TData, TV
                     ))
 
                 ):(
-                    //<TableRow>
-<p>pl</p>
-                    //</TableCell>
-                    //</TableRow>
+                    
+                null
+                    
                     ) }
             </TableBody>
         </Table>
