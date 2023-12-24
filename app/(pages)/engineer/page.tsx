@@ -21,8 +21,12 @@ import {
 
 import {useFetchDataSheet2} from  "../../hooks/useFetchDataSheet2"
 
+import {useFetchHistoryData} from  "../../hooks/useFetchHistoryData"
+
 import {useChangeStatus} from  "../../hooks/useChangeStatus"
 import { useUserContext } from '@/app/context/userContex';
+import TpmHistoryTable from '@/app/TpmHistory/data-table';
+import {columns} from "@/app/TpmHistory/columns";
 
 function Engineer() {
 
@@ -40,7 +44,16 @@ function Engineer() {
    }
   },[])
 
-  
+  type  tpmHistoryType ={
+    tpm:string,
+    agentName:string,
+    branch:string,
+    problem_desc:string,
+    eng:string,
+    dateIn:Date,
+    dateOut:Date,
+    received_by:string,
+  }
   
   
   const [input, setInput] = useState<string>('')
@@ -49,10 +62,24 @@ function Engineer() {
   
   const [tpmInfo, setTpmInfo] = useState<any>('')
   
+  const [tpmsearchHistory, setTpmsearchHistory] = useState<tpmHistoryType[]>([])
   
   const {updateSheet2_Status,addToHistory, Loading}=useChangeStatus()
   
   const {DataApi2, fetchReflesh2, setFetchReflesh2}=useFetchDataSheet2()
+
+  const {TpmHistoryData,fetchRefleshHistory,setFetchRefleshHistory}=useFetchHistoryData()
+
+
+  //useEffect(() => {
+    const BranchHistoryData:tpmHistoryType[] = TpmHistoryData.filter((data: { branch: string; })=>data.branch=="BAYELSA")
+    const filteredTpm = BranchHistoryData.filter((data)=>data.tpm == input)
+    //setTpmsearchHistory(BranchHistoryData)
+  //}, [])
+
+
+
+
   
   const handleSearch =(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
@@ -144,7 +171,8 @@ function Engineer() {
       <ToastContainer />
       <div className="felx flex-col space-y-2">
         <div className=" justify-center  pr-2 items-end flex flex-col cursor-pointer">
-        
+        {
+          input && (
         <Dialog>
           
       <DialogTrigger asChild>
@@ -152,41 +180,29 @@ function Engineer() {
         <ClockIcon className="w-6 h-6 mr-2 text-white border-2 border-white hover:border-gray-700 bg-gray-900 "/>
     
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+
+      <DialogContent className="sm:max-w-[1100px] ">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Tpm History</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+           Terminal:<p className="text-lg font-mono font-bold">{input}</p> History for this month.
           </DialogDescription>
         </DialogHeader>
-        {/* <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
-          </div>
-        </div> */}
+
+        <div className=" flex w-full gap-4 py-4">
+        <TpmHistoryTable columns={columns} data={filteredTpm} />
+          
+        </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          {/* <Button type="submit">Save changes</Button> */}
         </DialogFooter>
       </DialogContent>
+
       <p className="text-[9px] -mt-2 text-gray-300">TPM History</p>
     </Dialog>
+
+          )
+        }
         
         
         
