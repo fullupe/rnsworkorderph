@@ -24,6 +24,8 @@ function Dashboard() {
   const [filtedBrach, SetFiltedBrach]=useState([])
 
   const [filtedBrach_Problem, SetfiltedBrach_Problem]=useState([])
+  const [dailyTpmReceived, setDailyTpmReceived] = useState<string[]>([])
+  const [dailyTpmRepaired, setDailyTpmRepaired] = useState<string[]>([])
 
   const {DataApi}=useFetchData()
   const {DataApi2, }=useFetchDataSheet2()
@@ -40,17 +42,27 @@ function Dashboard() {
 
        SetfiltedBrach_Problem(filtedSheet2DataByBranch)
 
-      //const combined:any[] = [... new Set([...filtedSheet2DataByBranch, ...filtedHistoryDataByBranch])];
+       //const currentDate = new Date().toISOString().split('T')[0];
+       const currentDate = new Date();
 
-      // function areObjectsEqualByColumn(filtedSheet2DataByBranch, filtedHistoryDataByBranch, columnName) {
-      //   return filtedSheet2DataByBranch[columnName] === filtedHistoryDataByBranch[columnName];
-      // }
+       // Merge two arrays
+           const mergedArray = [...filtedSheet2DataByBranch, ...filtedHistoryDataByBranch];
 
+           // Filter by the current date
+         const filteredArray = mergedArray.filter((item) => new Date(item.createdAt).toLocaleDateString() === currentDate.toLocaleDateString());
 
+         const filteredArrayHistory = filtedHistoryDataByBranch.filter((item:any) => new Date(item.createdAt).toLocaleDateString() === currentDate.toLocaleDateString());
 
-      // const uniqueCombinedArray = [...filtedSheet2DataByBranch, ...filtedHistoryDataByBranch].filter((obj, index, self) => {
-      //   return index === self.findIndex((other) => areObjectsEqualByColumn(obj, other, "tpm"));
-      // });
+          // Remove duplicates based on the 'id' property
+          const uniqueArray = Array.from(new Set(filteredArray.map((item) => item.tpm))).map(
+            (tpm) => filteredArray.find((item) => item.tpm === tpm)
+          );
+
+          setDailyTpmReceived(uniqueArray);
+          setDailyTpmRepaired(filteredArrayHistory)
+
+          
+      
 
     }
 
@@ -140,33 +152,19 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
         <div className="w-full flex flex-col">
 
 
-    <p className="flex justify-center items-center uppercase  mt-4  text-white">{activeUserBranch} <span className="mx-2 uppercase text-white ">office</span></p>
+    <p className="flex justify-center items-center uppercase font-bold  mt-4  text-white">{activeUserBranch} <span className="mx-2 uppercase text-white ">office</span></p>
     <hr className="flex bg-gray-300 h-0.5 mt-2 "/>
     <div className="flex flex-wrap md:flex-rowd w-full justify-center items-center md:items-baseline text-white  ">
 
     <Card className="max-w-sm m-3 h-[400px] bg-[#262951]">
-    <Text className="text-white">Total Tpms  {activeUserBranch}</Text>
+    <Text className="text-white text-[20px]">{activeUserBranch} - {new Date().toLocaleDateString()} </Text>
+    
 
-    <Metric className="text-white">{TotalTpm}</Metric>
-
-    {/* <CategoryBar className="mt-3 text-white  w-full" values={[Active, Inactive]} colors={["emerald", "red"]} /> */}
-    {/* <Legend
-      className="mt-3"
-      categories={["Active Tpm", "Inactive Tpm"]}
-      colors={["emerald", "red"]}
-    /> */}
-
-       {/* <DonutChart
-        className="mt-6 text-4xl font-extrabold  "
-        data={activities}
-        category="count"
-        index="Active"
-        //valueFormatter={valueFormatter}
-        colors={["emerald", "red"]}
-        color="black"
-        
-        label="Tpm's"
-      /> */}
+    <Metric className="text-white text-[16px] mt-10 font-mono">  Total Tpm Received: <small className="text-bold text-3xl mr-4">{dailyTpmReceived.length}</small>ToDay</Metric>
+    <Metric className="text-white text-[16px] mt-10 font-mono">  Total Tpm Repaired: <small className="text-bold text-3xl mr-4">{dailyTpmRepaired.length}</small>ToDay</Metric>
+    <Metric className="text-white text-[16px] mt-10 font-mono">  Total Tpm in Maint: <small className="text-bold text-3xl mr-4">{dailyTpmReceived.length-dailyTpmRepaired.length}</small>ToDay</Metric>
+       
+   
 
   </Card>
 
