@@ -157,12 +157,12 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
     <div className="flex flex-wrap md:flex-rowd w-full justify-center items-center md:items-baseline text-white  ">
 
     <Card className="max-w-sm m-3 h-[400px] bg-[#262951]">
-    <Text className="text-white text-[20px]">{activeUserBranch} - {new Date().toLocaleDateString()} </Text>
+    <Text className="text-white text-[10px] font-bold">{activeUserBranch} - {new Date().toLocaleDateString()} <span className="decoration-inherit">(Tpm Maintenance)</span> </Text>
     
 
-    <Metric className="text-white text-[16px] mt-10 font-mono">  Total Tpm Received: <small className="text-bold text-3xl mr-4">{dailyTpmReceived.length}</small>ToDay</Metric>
-    <Metric className="text-white text-[16px] mt-10 font-mono">  Total Tpm Repaired: <small className="text-bold text-3xl mr-4">{dailyTpmRepaired.length}</small>ToDay</Metric>
-    <Metric className="text-white text-[16px] mt-10 font-mono">  Total Tpm in Maint: <small className="text-bold text-3xl mr-4">{dailyTpmReceived.length-dailyTpmRepaired.length}</small>ToDay</Metric>
+    <Metric className="text-white text-[10px] mt-10 font-mono font-light">   Received: <small className="text-bold text-3xl mr-4">{dailyTpmReceived.length}</small>ToDay</Metric>
+    <Metric className="text-white text-[10px] mt-10 font-mono font-light"> Repaired: <small className="text-bold text-3xl mr-4">{dailyTpmRepaired.length}</small>ToDay</Metric>
+    <Metric className="text-white text-[10px] mt-10 font-mono font-light"> In Maint: <small className="text-bold text-3xl mr-4">{dailyTpmReceived.length-dailyTpmRepaired.length}</small>ToDay</Metric>
        
    
 
@@ -170,7 +170,7 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
 
 
   <Card  className="max-w-sm m-3 text-4xl font-extrabold   h-[400px] bg-[#262952]">
-    <Title className="text-white">Problem Descriptions</Title>
+    <Title className="text-white">Problem Descriptions (All)</Title>
 
     <Flex color={'violet'} className="my-1">
       <Text >
