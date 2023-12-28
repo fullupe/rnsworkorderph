@@ -117,7 +117,7 @@ function Engineer() {
      
       ...tpmInfo,
       status:newstatus,
-      createdAt: new Date(),
+      createdAt_In: new Date(),
       eng:activeUser,
       }
       updateSheet2_Status(request)
@@ -137,9 +137,10 @@ function Engineer() {
           branch:tpmInfo.branch,
           problem_desc:tpmInfo.problem_desc,
           eng:activeUser,
-          dateIn:tpmInfo.createdAt,
+          dateIn:tpmInfo.createdAt_In,
           dateOut:new Date(),
-          received_by:tpmInfo.ruser
+          received_by:tpmInfo.ruser,
+          createdAt:new Date(),
         }
 
         addToHistory(history)
@@ -173,7 +174,7 @@ function Engineer() {
         <div className=" justify-center  pr-2 items-end flex flex-col cursor-pointer">
         {
           input && (
-        <Dialog>
+        <Dialog >
           
       <DialogTrigger asChild>
         {/* <Button variant="outline">Edit Profile</Button> */}
@@ -181,7 +182,7 @@ function Engineer() {
     
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[1100px] ">
+      <DialogContent className="sm:max-w-[1100px]">
         <DialogHeader>
           <DialogTitle>Tpm History</DialogTitle>
           <DialogDescription>
@@ -194,7 +195,7 @@ function Engineer() {
           
         </div>
         <DialogFooter>
-          {/* <Button type="submit">Save changes</Button> */}
+          
         </DialogFooter>
       </DialogContent>
 
@@ -294,7 +295,7 @@ function Engineer() {
                 <small className="ml-2 text-center ">
                   <TimeAgo
                     className="text-lg text-white"
-                    date={tpmInfo.createdAt}
+                    date={tpmInfo.createdAt_In}
                   />
                 </small>
               </p>

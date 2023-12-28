@@ -6,6 +6,7 @@ import { useFetchData } from '../hooks/useFetchData';
 import { useUserContext } from '../context/userContex';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import { useFetchDataSheet2 } from '../hooks/useFetchDataSheet2';
+import { useFetchHistoryData } from '../hooks/useFetchHistoryData';
 
 function Dashboard() {
 
@@ -26,6 +27,8 @@ function Dashboard() {
 
   const {DataApi}=useFetchData()
   const {DataApi2, }=useFetchDataSheet2()
+  const {TpmHistoryData}=useFetchHistoryData()
+  
   
   useEffect(()=>{
   const getUserBranch= async ()=>{
@@ -33,9 +36,26 @@ function Dashboard() {
       SetFiltedBrach(filted);
 
       const filtedSheet2DataByBranch = await DataApi2.filter((val:{branch:string})=>val.branch == activeUserBranch)
+      const filtedHistoryDataByBranch = await TpmHistoryData.filter((val:{branch:string})=>val.branch == activeUserBranch)
 
        SetfiltedBrach_Problem(filtedSheet2DataByBranch)
+
+      //const combined:any[] = [... new Set([...filtedSheet2DataByBranch, ...filtedHistoryDataByBranch])];
+
+      // function areObjectsEqualByColumn(filtedSheet2DataByBranch, filtedHistoryDataByBranch, columnName) {
+      //   return filtedSheet2DataByBranch[columnName] === filtedHistoryDataByBranch[columnName];
+      // }
+
+
+
+      // const uniqueCombinedArray = [...filtedSheet2DataByBranch, ...filtedHistoryDataByBranch].filter((obj, index, self) => {
+      //   return index === self.findIndex((other) => areObjectsEqualByColumn(obj, other, "tpm"));
+      // });
+
     }
+
+    // 
+
 
   
     getUserBranch()
@@ -126,15 +146,17 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
 
     <Card className="max-w-sm m-3 h-[400px] bg-[#262951]">
     <Text className="text-white">Total Tpms  {activeUserBranch}</Text>
+
     <Metric className="text-white">{TotalTpm}</Metric>
-    <CategoryBar className="mt-3 text-white  w-full" values={[Active, Inactive]} colors={["emerald", "red"]} />
-    <Legend
+
+    {/* <CategoryBar className="mt-3 text-white  w-full" values={[Active, Inactive]} colors={["emerald", "red"]} /> */}
+    {/* <Legend
       className="mt-3"
       categories={["Active Tpm", "Inactive Tpm"]}
       colors={["emerald", "red"]}
-    />
+    /> */}
 
-       <DonutChart
+       {/* <DonutChart
         className="mt-6 text-4xl font-extrabold  "
         data={activities}
         category="count"
@@ -144,7 +166,8 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
         color="black"
         
         label="Tpm's"
-      />
+      /> */}
+
   </Card>
 
 

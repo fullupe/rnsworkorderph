@@ -86,9 +86,10 @@ function Receiptionist() {
     const request = {
       ...tpmInfo,
       status:"Working On",
-      createdAt: new Date(),
+      createdAt_In: new Date(),
       ruser:activeUser,
-      problem_desc: pblem
+      problem_desc: pblem,
+      createdAt: new Date(),
     }
 
       add_To_Sheet2(request)

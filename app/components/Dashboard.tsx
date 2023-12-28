@@ -182,6 +182,7 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
     <div className="flex flex-wrap md:flex-rowd w-full justify-center items-center md:items-baseline text-white  ">
 
     <Card className="max-w-sm m-3 h-[400px] bg-[#262951]">
+      
     <Text className="text-white">Total Tpm's  {branch[0]}</Text>
     <Metric className="text-white">{TotalTpm}</Metric>
     <CategoryBar className="mt-3 text-white  w-full" values={[Active, Inactive]} colors={["emerald", "red"]} />
@@ -189,6 +190,7 @@ const Inactive = TotalTpm - TotalWorkingTpm.length;
       className="mt-3"
       categories={["Active Tpm", "Inactive Tpm"]}
       colors={["emerald", "red"]}
+      
     />
 
      

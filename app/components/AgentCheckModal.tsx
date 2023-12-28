@@ -1,9 +1,7 @@
 "use client"
 import React, { useState} from 'react'
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import TpmNewAlocate from './TpmNewAlocate'
-import TpmReAlocate from './TpmReAlocate'
+
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 
 
