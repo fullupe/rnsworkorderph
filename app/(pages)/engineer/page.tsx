@@ -25,6 +25,7 @@ import {useFetchHistoryData} from  "../../hooks/useFetchHistoryData"
 
 import {useChangeStatus} from  "../../hooks/useChangeStatus"
 import { useUserContext } from '@/app/context/userContex';
+
 import TpmHistoryTable from '@/app/TpmHistory/data-table';
 import {columns} from "@/app/TpmHistory/columns";
 
@@ -34,12 +35,14 @@ function Engineer() {
   const {user}=useUserContext()
 
   const [activeUser,setActiveUser]=useState('')
+  const [activeUserBranch,setActiveUserBranch]=useState('')
  
 
   useEffect(()=>{
    if(user){
 
      setActiveUser(user.username);
+     setActiveUserBranch(user.userbranch);
      
    }
   },[])
@@ -71,8 +74,11 @@ function Engineer() {
   const {TpmHistoryData,fetchRefleshHistory,setFetchRefleshHistory}=useFetchHistoryData()
 
 
+
+
+
   //useEffect(() => {
-    const BranchHistoryData:tpmHistoryType[] = TpmHistoryData.filter((data: { branch: string; })=>data.branch=="BAYELSA")
+    const BranchHistoryData:tpmHistoryType[] = TpmHistoryData.filter((data: { branch: string; })=>data.branch==activeUserBranch)
     const filteredTpm = BranchHistoryData.filter((data)=>data.tpm == input)
     //setTpmsearchHistory(BranchHistoryData)
   //}, [])
