@@ -28,6 +28,7 @@ import { useUserContext } from '@/app/context/userContex';
 
 import TpmHistoryTable from '@/app/TpmHistory/data-table';
 import {columns} from "@/app/TpmHistory/columns";
+import SelectProbelmSolution from '@/app/components/SelectProbelmSolution';
 
 function Engineer() {
 
@@ -62,6 +63,10 @@ function Engineer() {
   const [input, setInput] = useState<string>('')
   
   const [newstatus, setNewstatus] = useState<string>('')
+
+  const [problemSolutions, setProblemSolutions] = useState<string[]>([])
+  // problem description array to string 
+  const pblemSolution =problemSolutions.map((val:string|any)=>val.value).toString()
   
   const [tpmInfo, setTpmInfo] = useState<any>('')
   
@@ -147,6 +152,7 @@ function Engineer() {
           dateOut:new Date(),
           received_by:tpmInfo.ruser,
           createdAt:new Date(),
+          solution:pblemSolution
         }
 
         addToHistory(history)
@@ -173,7 +179,7 @@ function Engineer() {
   return (
     <div className="flex min-h-screen justify-center items-center">
     <div
-      className={`py-12  px-6 bg-whitee bg-gradient-to-r from-sky-500 to-indigo-500 shadow-2xl h-[95%] md:max-w-md !important text-lg rounded-2xl relative  flex flex-col h leading- w-[98%] text-white mt-6  overflow-hidden`}
+      className={`py-12  px-6 bg-whitee bg-gradient-to-r from-sky-500 to-indigo-500 shadow-2xl h-[95%] md:max-w-md !important text-lg rounded-2xl relative  flex flex-col h leading- w-[98%] text-white`}
     >
       <ToastContainer />
       <div className="felx flex-col space-y-2">
@@ -295,8 +301,9 @@ function Engineer() {
 
               </div>
               
+              <div className="flex flex-col justify-between">
               <label className="font-bold ">Duration</label>
-              <p className=" px-4 -mt-2 bg-gray-900 rounded-lg border-2 border-white text-white shadow-lg opacity-60">
+              <p className=" px-4 -mt-1 bg-gray-900 rounded-lg border-2 border-white text-white shadow-lg opacity-60">
               
                 <small className="ml-2 text-center ">
                   <TimeAgo
@@ -305,20 +312,23 @@ function Engineer() {
                   />
                 </small>
               </p>
-
+                </div>
             </div>
             }
             {Loading &&<Circles color="#FC6238" height={50} width={80} />}
           </div>
         </div>
 
-        {/* <hr /> */}
+        <hr />
 
-        <form className=" flex flex-col h-full w-full bg-yellow-00 p-4 space-y-3">
+        <form className=" flex flex-col h-full w-full bg-yellow-00 p-4 space-y-2">
+
+
+
          
+
+
           <label className=" font-cinzel ">Change Status</label>
-
-
 
       <Select className="z-50 pb-20 flex" value={newstatus} onValueChange={setNewstatus}>
         
@@ -351,10 +361,16 @@ function Engineer() {
         </SelectItem>
         
       </Select>
+          
+          {
+           newstatus == "Ready ✅" &&
+          <div className="flex w-full dbg-red-900 my-4">
+         <SelectProbelmSolution setProblemSolutions={setProblemSolutions}/>
+            </div>
 
-
+          }
         
-          <button type="button" disabled={!input || !newstatus || !tpmInfo} onClick={handleSubmit}className="bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded disabled:text-gray-500">
+          <button type="button" disabled={!input || !newstatus || !tpmInfo} onClick={handleSubmit}className="bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-2  px-4 border border-white hover:border-transparent rounded disabled:text-gray-500">
             Submit
           </button>
         </form>
