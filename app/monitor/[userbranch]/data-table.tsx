@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { ColorRing } from "react-loader-spinner"
 
@@ -32,6 +32,33 @@ interface DataTableProps<TData, TValue> {
 }
 
 function MonitorDataTable<TData, TValue>({columns,data,branch}: DataTableProps<TData, TValue>) {
+
+
+  // run diff componet 20
+
+  const [currentComponent, setCurrentComponent] = useState(1);
+
+  useEffect(() => {
+    // Switch to Component2 after 5 minutes
+    const componentSwitchTimer = setTimeout(() => {
+      setCurrentComponent(2);
+    }, 3 * 60 * 1000);
+
+    // Switch back to Component1 after 2 minutes
+    const switchBackTimer = setTimeout(() => {
+      setCurrentComponent(1);
+    }, 4 * 60 * 1000);
+
+    // Clean up timers
+    return () => {
+      clearTimeout(componentSwitchTimer);
+      clearTimeout(switchBackTimer);
+    };
+  }, [currentComponent]);
+
+
+
+  // run diff component
   
 
   const table = useReactTable({
@@ -91,6 +118,12 @@ useEffect(() => {
   return (
     <div className="" >
     <div className="rounded-md border" >
+
+      {/* {currentComponent === 1 ? <Component1 /> : <Component2 />} */}
+  
+             
+      {
+               currentComponent === 1 ? (
         <Table className=" mt-10" >
           <TableHeader className=" " >
             {table.getHeaderGroups().map(headerGroup=>{
@@ -178,6 +211,26 @@ useEffect(() => {
           </TableBody>
       
         </Table>
+
+):(
+  <div>
+
+     
+  <iframe frameBorder="0"  
+  className="pl-5 pr-5 h-screen w-screen" 
+  src="https://player.vimeo.com/video/923380340?autoplay=1&loop=1&autopause=0&muted=1" 
+
+  allow="autoplay" 
+  //@ts-ignore
+  webkitallowfullscreen 
+  mozallowfullscreen 
+  allowFullScreen > 
+     
+      </iframe>
+
+
+  </div>
+  )}
     </div>
 
     {/* pagination */}
