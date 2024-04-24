@@ -68,10 +68,10 @@ function MonitorDataTable<TData, TValue>({columns,data,branch}: DataTableProps<T
     checkLiveStatus();
 
     // Poll every 30 seconds to check live status
-    const intervalId = setInterval(checkLiveStatus, 30000);
+    //const intervalId = setInterval(checkLiveStatus, 30000);
 
     // Clear interval on component unmount
-    return () => clearInterval(intervalId);
+    //return () => clearInterval(intervalId);
   }, []);
   // run diff componet 20
 
